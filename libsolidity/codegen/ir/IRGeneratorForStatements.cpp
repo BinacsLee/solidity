@@ -1318,7 +1318,7 @@ void IRGeneratorForStatements::endVisit(FunctionCall const& _functionCall)
 		{
 			IRVariable argument =
 				arrayType.baseType()->isValueType() ?
-				convert(*arguments.front(), *arrayType.baseType()):
+				convert(*arguments.front(), *arrayType.baseType()) :
 				*arguments.front();
 
 			m_code <<
