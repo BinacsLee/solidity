@@ -3271,12 +3271,13 @@ string YulUtilFunctions::copyStructToStorageFunction(StructType const& _from, St
 	return m_functionCollector.createFunction(functionName, [&]() {
 		Whiskers templ(R"(
 			function <functionName>(slot, value) {
-				<?fromStorage> if eq(slot, value) { leave } </fromStorage>
+				<?fromStorage> if iszero(eq(slot, value)) { </fromStorage>
 				<#member>
 				{
 					<updateMemberCall>
 				}
 				</member>
+				<?fromStorage> } </fromStorage>
 			}
 		)");
 		templ("functionName", functionName);
